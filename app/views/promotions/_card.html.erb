@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <% @promotions.each do |promotion| %>
+      <div class="card">
+        <strong class="card-text"> <%= link_to promotion.name, promotion_path(promotion) %></strong>
+          <p class="card-text"><%= promotion.description %></p>
+          <p>Código: <%= promotion.code %> </p>
+          <p>Desconto: <%= number_to_percentage promotion.discount_rate, precision: 2, separator: ',' %></p>
+          <p>Quantidade de Cupons: <%= promotion.coupon_quantity %></p>
+          <p>Expiração: <%= promotion.expiration_date.strftime('%d/%m/%Y') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
