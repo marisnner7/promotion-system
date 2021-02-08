@@ -1,0 +1,17 @@
+.card {
+  display: grid;
+  grid-template-columns: auto;
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin: 1%;
+  margin-bottom: 2rem;
+  border: $green dotted 1px;
+  border-radius: 5px;
+
+}
+
+
+.card-text {
+  font-size: 85%;
+}
