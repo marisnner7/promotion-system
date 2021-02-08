@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+puts 'Deleting promotions'
+Promotion.delete_all
+
+puts 'Creating Promotions'
+5.times do
+  promotion = Promotion.create!(
+    name: Faker::Company.name,
+    description: Faker::Company.buzzword,
+    code: Faker::Barcode.ean(8),
+    discount_rate: rand(1..15).truncate(2),
+    coupon_quantity: rand(1..20),
+    expiration_date: Faker::Date.forward(days: 45)
+  )
+end
+
+puts 'Promotions Created!'
