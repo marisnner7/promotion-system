@@ -1,5 +1,6 @@
 <%= "Nenhuma promoção cadastrada" if @promotions.empty? %>
 
+<%= render 'search', promotion: @promotion %>
 
 <%= render 'card', promotion: @promotion %>
 
