@@ -1,9 +1,14 @@
 class PromotionsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_promotion, only: [:show, :edit, :update, :destroy]
+  before_action :set_promotion, only: [:show, :edit, :update, :destroy, :generate_coupons]
   def index
     @promotions = Promotion.all
+    @search = params["search"]
+    if @search.present?
+      @name = @search["name"]
+      @promotions = Promotion.where("name ILIKE ?", "%#{@name}% ")
+    end
   end
 
   def show
@@ -21,6 +26,19 @@ class PromotionsController < ApplicationController
       render :new
     end
   end
+
+  def generate_coupons
+    (1..@promotion.coupon_quantity).each do |number|
+      code = "#{@promotion.code}-#{'%04d' % number}"
+      Coupon.create!(promotion: @promotion, code: code)
+    end
+    flash[:success] = 'Cupons gerados com sucesso'
+    # @promotion.generate_coupons!
+    redirect_to @promotion
+
+    
+  end
+
 
   private
 
