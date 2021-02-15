@@ -1,8 +1,17 @@
-<%= @promotion.name %>
-<%= @promotion.description %>
-<%= @promotion.code %>
-<%= number_to_percentage @promotion.discount_rate, precision: 2, separator: ',' %>
-<%= @promotion.coupon_quantity %>
-<%= @promotion.expiration_date.strftime('%d/%m/%Y') %>
+<div class="card">
+  <div class="card-header">
+    <%= @promotion.name %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @promotion.description %></h5>
+    <p class="card-text"><%= @promotion.code %></p>
+    <p class="card-text"><%= number_to_percentage @promotion.discount_rate, precision: 2, separator: ',' %></p>
+    <p class="card-text"><%= @promotion.coupon_quantity %></p>
+    <p class="card-text"><%= @promotion.expiration_date.strftime('%d/%m/%Y') %></p>
+    <%= link_to 'Gerar cupons', generate_coupons_promotion_path, method: :post , class:'btn btn-primary'%>
+    <%= link_to 'Editar', edit_promotion_path, class:'btn btn-info'%>
 
-<%= link_to 'Voltar', promotions_path %>
+    <%= link_to 'Deletar promoção', promotion_path, method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Voltar', promotions_path, class:'btn btn-secondary' %>
+  </div>
+</div>
