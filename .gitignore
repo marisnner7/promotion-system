@@ -28,6 +28,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/coverage
 
 /public/packs
 /public/packs-test
@@ -35,3 +36,4 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+public/assets
