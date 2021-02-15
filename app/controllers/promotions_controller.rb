@@ -2,14 +2,14 @@ class PromotionsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_promotion, only: [:show, :edit, :update, :destroy, :generate_coupons]
-  def index
-    @promotions = Promotion.all
-    @search = params["search"]
-    if @search.present?
-      @name = @search["name"]
-      @promotions = Promotion.where("name ILIKE ?", "%#{@name}% ")
+    def index
+      @promotions = Promotion.all
+      @search = params["search"]
+      if @search.present?
+        @name = @search["name"]
+        @promotions = Promotion.where("name ILIKE ?", "%#{@name}%")
+      end
     end
-  end
 
   def show
   end
@@ -18,6 +18,7 @@ class PromotionsController < ApplicationController
     @promotion = Promotion.new
   end
 
+  
   def create
     @promotion = Promotion.new(promotion_params)
     if @promotion.save
@@ -25,6 +26,21 @@ class PromotionsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def edit
+    
+  end
+
+  def update
+    @promotion.update(promotion_params)
+    redirect_to @promotion, notice: 'Promoção editada'
+    
+  end
+
+  def destroy
+    @promotion.destroy
+    redirect_to promotions_path, notice: "Promoção deletada com sucesso"
   end
 
   def generate_coupons
@@ -43,7 +59,7 @@ class PromotionsController < ApplicationController
   private
 
   def promotion_params
-  params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)    
+    params.permit(:promotion)    
   end
 
   def set_promotion
