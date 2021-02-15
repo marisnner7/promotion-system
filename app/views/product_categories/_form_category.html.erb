@@ -1,0 +1,9 @@
+<div class="container">
+  <%= simple_form_for @product_category do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :code %>
+    <%= f.button :submit, class: "btn-primary" %>
+    <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
+  <% end %>
+</div>

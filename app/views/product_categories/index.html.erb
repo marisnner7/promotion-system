@@ -1,0 +1,7 @@
+<%= "Nenhuma categoria cadastrada" if @product_categories.empty? %>
+
+<%= link_to "Registrar categoria de produto", new_product_category_path , class: 'btn btn-outline-secondary' %>
+<% @product_categories.each do |product_category| %>
+  <%= link_to product_category.name, product_category_path(product_category)  %>
+  <%= product_category.code %> 
+<% end %>
