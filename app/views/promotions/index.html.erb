@@ -1,10 +1,9 @@
 <%= "Nenhuma promoção cadastrada" if @promotions.empty? %>
 
+<%= link_to 'Registrar uma promoção', new_promotion_path, class: 'btn btn-success' %>
+<%= link_to 'Voltar' , root_path , class: 'btn btn-secondary'%>
 <%= render 'search', promotion: @promotion %>
 
 <%= render 'card', promotion: @promotion %>
 
-<%= link_to 'Voltar' , root_path %>
 
-
-<%= link_to 'Registrar uma promoção', new_promotion_path %>
