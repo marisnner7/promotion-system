@@ -18,7 +18,7 @@ context 'when user do registration' do
     expect(page).to have_link('Logout')
   end
 
-  xit 'and log out' do
+  it 'and log out' do
     user = create(:user)
 
     login_as(user)
