@@ -11,7 +11,7 @@ puts 'Deleting promotions'
 Promotion.delete_all
 
 puts 'Creating Promotions'
-5.times do
+8.times do
   promotion = Promotion.create!(
     name: Faker::Company.name,
     description: Faker::Company.buzzword,
