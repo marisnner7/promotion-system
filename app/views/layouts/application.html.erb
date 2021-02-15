@@ -13,7 +13,15 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
-    <%= yield %>
+    <p><%= flash[:success] %></p>
+    <p class="notice"> <%= notice %></p>
+    <p class="alert"> <%= alert %></p>
+    <div id="page-container">
+      <%= render 'shared/navbar' %>
+      <%= yield %>
+      <footer id="footer">
+        <%= render 'shared/footer' %>
+      </footer>
+    </div>
   </body>
 </html>
