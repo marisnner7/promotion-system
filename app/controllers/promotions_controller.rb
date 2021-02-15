@@ -34,7 +34,7 @@ class PromotionsController < ApplicationController
 
   def update
     @promotion.update(promotion_params)
-    redirect_to @promotion, notice: 'Promoção editada'
+    redirect_to promotion_path, notice: 'Promoção editada'
     
   end
 
@@ -59,7 +59,9 @@ class PromotionsController < ApplicationController
   private
 
   def promotion_params
-    params.permit(:promotion)    
+    params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity, :expiration_date)    
+
+    
   end
 
   def set_promotion

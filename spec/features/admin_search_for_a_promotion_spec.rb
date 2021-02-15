@@ -2,13 +2,11 @@ require 'rails_helper'
 
 feature 'Admin search for a promotion' do
   before do
-    create(:promotion)
     user = create(:user)
     login_as user, scope: :user
+    create(:promotion)
   end
   scenario 'sucessfully' do
-    user = create(:user)
-    login_as user, scope: :user
 
     visit root_path
     click_on 'Promoções'
@@ -21,19 +19,18 @@ feature 'Admin search for a promotion' do
     expect(page).to have_content('22/12/2033')
     expect(page).to have_content('10,00%')
   end
+
   scenario 'and promotion not found' do
-
-    visit root_path
-    click_on 'Promoções'
-    fill_in 'search[name]', with: 'Cyber'
-    click_on('Buscar promoção')
-
-    expect(current_path).to eq(promotions_path)
-    expect(page).to_not have_content('Cyber Monday')
-    expect(page).to_not have_content('Promoção de Cyber Monday')
-    expect(page).to_not have_content('22/12/2033')
-    expect(page).to_not have_content('15,00%')
-    expect(page).to have_content('Nenhuma promoção encontrada')
+      visit root_path
+      click_on 'Promoções'
+      fill_in 'search[name]', with: 'Cyber'
+      click_on('Buscar promoção')
+      expect(current_path).to eq(promotions_path)
+      expect(page).to_not have_content('Cyber Monday')
+      expect(page).to_not have_content('Promoção de Cyber Monday')
+      expect(page).to_not have_content('22/12/2033')
+      expect(page).to_not have_content('15,00%')
+      expect(page).to have_content('Nenhuma promoção encontrada')
 
     end
 
