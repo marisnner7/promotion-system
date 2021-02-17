@@ -1,0 +1,8 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Código: <%= coupon.code %> <%= coupon.title %></li>
+  <% if coupon.active? %>
+    <li class="list-group-item"> <%= link_to 'Descartar cupom', inactivate_coupon_path(coupon), method: :post %></li>
+  <% else %>
+    <li class="list-group-item"><%= link_to 'Ativar cupom', reactivate_coupon_path(coupon), method: :post, class: "ls-btn-primary" %></li>
+  <% end %>
+</ul>
