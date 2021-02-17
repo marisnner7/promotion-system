@@ -7,6 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+
+puts 'Cleaning DB'
+
+ProductCategory.delete_all
+puts 'Products Categories deleted'
 puts 'Deleting promotions'
 Promotion.delete_all
 
@@ -21,5 +26,16 @@ puts 'Creating Promotions'
     expiration_date: Faker::Date.forward(days: 45)
   )
 end
-
 puts 'Promotions Created!'
+
+puts 'Creating products categories'
+2.times do
+  promotion = ProductCategory.create!(
+    name: Faker::Company.name,
+    code: Faker::Barcode.ean(8),
+  )
+end
+
+puts 'products category created'
+
+
