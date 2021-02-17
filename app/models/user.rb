@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  validates :email, format: { with: /\A[^@\s]+@locaweb.com\z/,
+  validates :email, format: { with: /\A[^@\s]+@locaweb.com.br\z/,
   message: 'deve ser do domínio locaweb.com' }
 
 end
