@@ -11,8 +11,6 @@ context 'when user do registration' do
       click_on 'Login'
     end
 
-    expect(page).to have_current_path(root_path, ignore_query: true)
-    expect(page).to have_content('user1@locaweb.com.br')
     expect(page).to have_content('Login efetuado com sucesso')
     expect(page).not_to have_link('Login')
     expect(page).to have_link('Logout')
@@ -34,7 +32,7 @@ context 'when user do registration' do
     click_on 'Login'
     click_on 'Sign up'
     fill_in 'Email', with: 'user@gmail.com.br'
-    fill_in 'Password', with: '123456'
+    find('div.user_password').fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
     within 'form' do
       click_on 'Sign up'

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 feature 'Admin registers a promotion' do
-  #include_context 'When authenticated'
-
   before(:each) do
     
     user = create(:user)

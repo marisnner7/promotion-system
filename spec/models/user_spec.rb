@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe User do
   context 'e-mail validation' do
-    it 'must be at domain @locaweb.com' do
+    it 'must be at domain @locaweb.com.br' do
       user = create(:user)
       user.valid?
 
