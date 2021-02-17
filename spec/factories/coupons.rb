@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :coupon do
-    code { "xxxx" }
-    status { 1 }
+    sequence(:code) { |n| "#{nnnn}" }
+    status { 0 }
     order { "MyString" }
     promotion { Natal10 }
   end
