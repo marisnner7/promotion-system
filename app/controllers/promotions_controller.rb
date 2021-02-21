@@ -59,7 +59,7 @@ class PromotionsController < ApplicationController
 
   def promotion_params
     params.require(:promotion).permit(:name, :description, :code, :discount_rate, :coupon_quantity,
-                                      :expiration_date)
+                                      :expiration_date, product_category_ids: [])
   end
 
   def set_promotion

@@ -7,6 +7,7 @@
     <%= f.input :discount_rate %>
     <%= f.input :expiration_date, :order => [:day, :month, :year] %>
     <%= f.input :coupon_quantity %>
+    <%= f.association :product_categories, as: :check_boxes %>
     <%= f.button :submit, class: "btn-primary" %>
     <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
   <% end %>
