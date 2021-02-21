@@ -23,7 +23,6 @@ feature 'Admin search for a promotion' do
 
   scenario 'and promotion not found' do
     visit root_path
-    click_on 'Promoções'
     fill_in 'search[name]', with: 'Cyber'
     click_on('Buscar promoção')
     expect(current_path).to eq(promotions_path)

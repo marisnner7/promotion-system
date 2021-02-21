@@ -1,6 +1,6 @@
 <%= simple_form_for :search, url: promotions_path, method: "GET", html: { class: 'form-inline' } do |f| %>
   <%= f.input :name, input_html: {value: ""} %>   
   <%= f.submit "Buscar promoção", class: "btn btn-primary" %>
-  <%= "Nenhuma promoção encontrada" if @promotions.empty? %>
 
 <% end %>
+

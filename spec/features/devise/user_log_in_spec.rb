@@ -36,7 +36,7 @@ context 'when user do registration' do
     fill_in 'Email', with: 'user@gmail.com.br'
     find('div.user_password').fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
-    within 'form' do
+    within('.form-actions') do
       click_on 'Sign up'
     end
 

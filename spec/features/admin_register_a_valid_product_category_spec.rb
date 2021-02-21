@@ -10,8 +10,11 @@ feature 'Admin registers a valid category' do
 
     click_on 'Categorias de produto'
     click_on 'Registrar categoria de produto'
-    fill_in 'Nome', with: 'Hospedagem'
-  end
+      within('.container') do
+
+      fill_in 'Nome', with: 'Hospedagem'
+      end
+    end
 
   scenario 'and attributes cannot be blank' do
     fill_in 'Código', with: ''

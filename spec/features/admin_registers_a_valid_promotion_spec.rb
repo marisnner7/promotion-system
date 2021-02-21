@@ -13,12 +13,14 @@ feature 'Admin registers a valid promotion' do
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar uma promoção'
-    fill_in 'Nome', with: ''
-    fill_in 'Descrição', with: ''
-    fill_in 'Código', with: ''
-    fill_in 'Desconto', with: ''
-    fill_in 'Quantidade de cupons', with: ''
-    click_on 'Criar promoção'
+    within(".container") do
+      fill_in 'Nome', with: ''
+      fill_in 'Descrição', with: ''
+      fill_in 'Código', with: ''
+      fill_in 'Desconto', with: ''
+      fill_in 'Quantidade de cupons', with: ''
+      click_on 'Criar promoção'
+    end
 
     expect(page).to have_content('não pode ficar em branco')
   end

@@ -14,10 +14,15 @@ feature 'Admin edits a promotion' do
     click_on 'Natal'
     click_on 'Editar'
 
-    fill_in 'Nome', with: 'Natal 2021'
-    fill_in 'Descrição', with: 'Promoção de Natal 2021'
+    within('.container') do
+      
+      fill_in 'Nome', with: 'Natal 2021'
+      fill_in 'Descrição', with: 'Promoção de Natal 2021'
+  
+      click_on 'Editar promoção'
+    end
 
-    click_on 'Editar promoção'
+
 
     expect(page).to have_content('Natal 2021')
     expect(page).to have_content('Promoção de Natal 2021')
