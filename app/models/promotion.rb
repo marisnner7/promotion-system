@@ -2,6 +2,8 @@
 
 class Promotion < ApplicationRecord
   has_many :coupons, dependent: :destroy
+  belongs_to :user, class_name: 'User', foreign_key: 'creator_id', optional: true
+  belongs_to :user, class_name: 'User', foreign_key: 'approver_id', optional: true
   has_many :product_category_promotions
   has_many :product_categories, through: :product_category_promotions
 
@@ -15,6 +17,10 @@ class Promotion < ApplicationRecord
     coupons
       .create_with(created_at: Time.now, updated_at: Time.now)
       .insert_all!(generate_coupons_code)
+  end
+
+  def approved?
+    approved_at?
   end
 
   private

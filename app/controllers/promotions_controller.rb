@@ -20,7 +20,9 @@ class PromotionsController < ApplicationController
   end
 
   def create
-    @promotion = Promotion.new(promotion_params)
+    @promotion = Promotion.create(promotion_params)
+    @promotion.creator_id = User.find(current_user.id).id
+
     if @promotion.save
       redirect_to promotions_path(@promotion)
     else
@@ -44,6 +46,13 @@ class PromotionsController < ApplicationController
     @promotion.generate_coupons!
     flash[:success] = 'Cupons gerados com sucesso'
     redirect_to @promotion
+  end
+
+  def approve
+    @promotion = Promotion.find(params[:id])
+    @promotion.update(approver_id: current_user.id, approved_at: Time.now)
+
+    redirect_to promotion_path(@promotion)
   end
 
   private

@@ -8,12 +8,26 @@
     <p class="card-text">Desconto: <%= number_to_percentage @promotion.discount_rate, precision: 2, separator: ',' %></p>
     <p class="card-text">Quantidade: <%= @promotion.coupon_quantity %></p>
     <p class="card-text">Expiração: <%= @promotion.expiration_date.strftime('%d/%m/%Y') %></p>
-    <%= link_to 'Gerar cupons', generate_coupons_promotion_path, method: :post , class:'btn btn-primary'%>
-    <%= link_to 'Editar', edit_promotion_path, class:'btn btn-info'%>
+      <% @promotion.product_categories.each do |product_category| %>
+        <p  class="card-text">Categoria: ><%= product_category.name %></p>
+      <% end %>
+  </div>
 
+     <% if @promotion.approved? %>
+        <p class="card-header">Promoção aprovada em <%= @promotion.approved_at %></p>
+      <% end %>
+
+    <% if current_user.id == @promotion.creator_id && !@promotion.approved? %>
+      <p class="btn btn-outline-warning">Aguardando aprovação</p>
+      <% elsif current_user.id != @promotion.creator_id && !@promotion.approved? %>
+        <%= link_to 'Aprovar promoção', approve_promotion_path(@promotion), method: :post, class: "btn btn-success" %>
+      <% elsif @promotion.approved? && @promotion.coupons.empty? %>
+        <%= link_to 'Gerar cupons', generate_coupons_promotion_path, method: :post , class:'btn btn-primary'%>
+    <% end %>
+
+    <%= link_to 'Editar', edit_promotion_path, class:'btn btn-info'%>
     <%= link_to 'Deletar promoção', promotion_path, method: :delete, class: 'btn btn-danger' %>
     <%= link_to 'Voltar', promotions_path, class:'btn btn-secondary' %>
-  </div>
 </div>
 
 

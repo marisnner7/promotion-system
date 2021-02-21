@@ -11,6 +11,7 @@ feature 'Admin generates coupons' do
     visit root_path
     click_on 'Promoções'
     click_on 'Natal'
+    click_on 'Aprovar promoção'
     click_on 'Gerar cupons'
   end
 
