@@ -1,5 +1,30 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Coupon, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context '#title' do
+    it 'has default value' do
+      promotion = create(:promotion)
+      coupon = create(:coupon, code: 'NATAL10-0002', promotion: promotion)
+
+      expect(coupon).to be_active
+      expect(coupon.title).to eq('NATAL10-0002 (Active)')
+    end
+
+    it 'is active' do
+      promotion = create(:promotion)
+      coupon = create(:coupon, code: 'NATAL10-0002', promotion: promotion)
+
+      expect(coupon).to be_active
+      expect(coupon.title).to eq('NATAL10-0002 (Active)')
+    end
+
+    it 'is inactive' do
+      coupon = Coupon.new(code: 'NATAL10-0002', status: :inactive)
+
+      expect(coupon).to be_inactive
+      expect(coupon.title).to eq('NATAL10-0002 (Inactive)')
+    end
+  end
 end
