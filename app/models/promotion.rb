@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 class Promotion < ApplicationRecord
   has_many :coupons, dependent: :destroy
+  has_many :product_category_promotions
+  has_many :product_categories, through: :product_category_promotions
 
   validates :name, :code, :discount_rate,
-            :coupon_quantity, :expiration_date, presence: { message: "não pode ficar em branco" }
-  validates :code, uniqueness: { message: "deve ser único" }
-  
-  
+            :coupon_quantity, :expiration_date, presence: { message: 'não pode ficar em branco' }
+  validates :code, uniqueness: { message: 'deve ser único' }
+
   def generate_coupons!
     raise 'Cupons já foram gerados' if coupons.any?
 

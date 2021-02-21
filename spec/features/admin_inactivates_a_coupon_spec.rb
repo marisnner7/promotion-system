@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 feature 'Admin inactivate coupon' do
   scenario 'successfully' do
@@ -10,7 +12,7 @@ feature 'Admin inactivate coupon' do
 
     login_as user, scope: :user
     visit promotion_path(promotion)
-    click_on 'Descartar cupom'
+    click_on 'Desativar cupom'
 
     expect(page).to have_content('Cupom cancelado com sucesso')
     expect(page).to have_content('CYBER15-0001 (Inactive)')

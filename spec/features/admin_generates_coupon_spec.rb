@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Admin generates coupons' do
@@ -8,12 +10,11 @@ feature 'Admin generates coupons' do
 
     visit root_path
     click_on 'Promoções'
-    click_on  'Natal'
+    click_on 'Natal'
     click_on 'Gerar cupons'
   end
-  
-  scenario 'with coupon quantity available' do
 
+  scenario 'with coupon quantity available' do
     expect(page).to have_content('NATAL10-0001')
     expect(page).to have_content('NATAL10-0002')
     expect(page).to have_content('NATAL10-0003')
@@ -24,8 +25,7 @@ feature 'Admin generates coupons' do
   end
 
   scenario 'and coupons are already generated' do
-    
     expect(page).not_to have_content('Emitir cupons')
-    expect(page).to have_content("NATAL10")
+    expect(page).to have_content('NATAL10')
   end
 end

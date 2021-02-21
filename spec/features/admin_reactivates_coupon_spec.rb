@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Admin reactivates coupon' do
-
   background do
     user = create(:user)
     login_as user
   end
-  
+
   scenario 'successfully' do
     visit root_path
     promotion = create(:promotion)
     promotion.generate_coupons!
-    
+
     promotion.coupons.first.inactive!
     promotion.coupons.first.active!
 
@@ -26,13 +27,12 @@ feature 'Admin reactivates coupon' do
     visit root_path
     promotion = create(:promotion)
     promotion.generate_coupons!
-    
+
     promotion.coupons.first.inactive!
     promotion.coupons.first.active!
 
     click_on 'Promoções'
     click_on 'Natal'
-
 
     expect(page).to_not have_link('Reativar')
   end

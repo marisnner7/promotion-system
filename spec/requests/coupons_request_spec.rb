@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Homes', type: :request do
+RSpec.describe 'Coupons', type: :request do
 end
