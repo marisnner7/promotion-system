@@ -2,6 +2,7 @@
   <div class="card">
     <div class="card-body">
       <%= render partial: 'coupon', locals: { coupon: coupon } %>
+      <%= render partial: 'promotions/card', locals: { promotion: coupon.promotion, title_promotion: 'Promoção: ' } %>
     </div>
   </div>
 <% end %>
