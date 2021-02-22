@@ -24,7 +24,7 @@ class PromotionsController < ApplicationController
     @promotion.creator_id = User.find(current_user.id).id
 
     if @promotion.save
-      redirect_to promotions_path(@promotion)
+      redirect_to promotion_path(@promotion)
     else
       render :new
     end
