@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :promotions do
     post 'generate_coupons', on: :member
     post 'approve', on: :member
-
   end
   resources :product_categories, only: %i[index show new create destroy]
 

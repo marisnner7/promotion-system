@@ -1,0 +1,72 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+
+Lint/UselessAssignment:
+  Enabled: false
+
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 25
+
+RSpec/RepeatedExample:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 30
+
+RSpec/MultipleExpectations:
+  Max: 10
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+
+
+
+

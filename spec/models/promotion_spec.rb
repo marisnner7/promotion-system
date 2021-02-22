@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 describe Promotion do
-  context 'validation' do
+  context 'when validation' do
     it 'attributes cannot be blank' do
-      promotion = Promotion.new
+      promotion = described_class.new
 
       promotion.valid?
 
@@ -20,10 +20,10 @@ describe Promotion do
     end
 
     it 'code must be uniq' do
-      Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-                        code: 'NATAL10', discount_rate: 10,
-                        coupon_quantity: 100, expiration_date: '22/12/2033')
-      promotion = Promotion.new(code: 'NATAL10')
+      described_class.create!(name: 'Natal', description: 'Promoção de Natal',
+                              code: 'NATAL10', discount_rate: 10,
+                              coupon_quantity: 100, expiration_date: '22/12/2033')
+      promotion = described_class.new(code: 'NATAL10')
 
       promotion.valid?
 

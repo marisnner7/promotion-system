@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Coupon management' do
-  context 'show' do
+  context 'when show' do
     it 'render coupon json with discount' do
       promotion = Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                                     description: 'Promoção de Cyber Monday',
@@ -35,7 +35,7 @@ describe 'Coupon management' do
     end
   end
 
-  context 'burn' do
+  context 'when burn' do
     it 'change coupon status' do
       promotion = Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                                     description: 'Promoção de Cyber Monday',
@@ -56,11 +56,11 @@ describe 'Coupon management' do
                                     description: 'Promoção de Cyber Monday',
                                     code: 'CYBER15', discount_rate: 15,
                                     expiration_date: '22/12/2033')
-      coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001')
+      Coupon.create!(promotion: promotion, code: 'CYBER15-0001')
 
       post '/api/v1/coupons/ABCD-0001/burn', params: { order: { code: 'ORDER123' } }
 
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(:not_found)
       expect(response.body).to include('Cupom não encontrado')
     end
 
@@ -73,10 +73,10 @@ describe 'Coupon management' do
 
       post "/api/v1/coupons/#{coupon.code}/burn", params: {}
 
-      expect(response).to have_http_status(412)
+      expect(response).to have_http_status(:precondition_failed)
     end
 
-    it 'order must exist' do
+    it 'order must exist with empty code' do
       promotion = Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                                     description: 'Promoção de Cyber Monday',
                                     code: 'CYBER15', discount_rate: 15,
@@ -85,7 +85,7 @@ describe 'Coupon management' do
 
       post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: '' } }
 
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
 
     it 'coupon cannot be burned if category not provided' do
@@ -94,17 +94,17 @@ describe 'Coupon management' do
                                     code: 'CYBER15', discount_rate: 15,
                                     expiration_date: 1.day.from_now)
       product_category = ProductCategory.create!(
-          name: "Category 1",
-          code: "CAT-1"
+        name: 'Category 1',
+        code: 'CAT-1'
       )
       promotion.product_category_ids = [product_category.id]
       promotion.save!
 
       coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001', status: :active)
 
-      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123'} }
+      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123' } }
 
-      expect(response).to have_http_status(400)
+      expect(response).to have_http_status(:bad_request)
       expect(response.body).to include('Categoria inválida para cupom')
     end
 
@@ -116,7 +116,7 @@ describe 'Coupon management' do
 
       coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001', status: :active)
 
-      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123'} }
+      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123' } }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Cupom utilizado com sucesso')
@@ -130,7 +130,7 @@ describe 'Coupon management' do
 
       coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001', status: :active)
 
-      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123'}, category: "CAT-1" }
+      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123' }, category: 'CAT-1' }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Cupom utilizado com sucesso')
@@ -143,12 +143,12 @@ describe 'Coupon management' do
                                     expiration_date: 1.day.from_now)
       coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001', status: :active)
       product_category = ProductCategory.create!(
-          name: "Category 1",
-          code: "CAT-1"
+        name: 'Category 1',
+        code: 'CAT-1'
       )
       promotion.product_category_ids = [product_category.id]
       promotion.save!
-      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123'}, category: "CAT-1" }
+      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123' }, category: 'CAT-1' }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Cupom utilizado com sucesso')
@@ -161,12 +161,12 @@ describe 'Coupon management' do
                                     expiration_date: 1.day.from_now)
       coupon = Coupon.create!(promotion: promotion, code: 'CYBER15-0001', status: :active)
       product_category = ProductCategory.create!(
-          name: "Category 1",
-          code: "CAT-1"
+        name: 'Category 1',
+        code: 'CAT-1'
       )
       promotion.product_category_ids = [product_category.id]
       promotion.save!
-      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123'}, category: "CAT-2" }
+      post "/api/v1/coupons/#{coupon.code}/burn", params: { order: { code: 'ORDER123' }, category: 'CAT-2' }
 
       expect(response).to have_http_status(:bad_request)
       expect(response.body).to include('Categoria inválida para cupom')

@@ -15,28 +15,28 @@ module Api
 
       def burn
         @coupon.order = params.require(:order).permit(:code)[:code]
-        return render json: 'Categoria inválida para cupom', status: :bad_request unless @coupon.valid_category? params[:category]
+        unless @coupon.valid_category? params[:category]
+          return render json: 'Categoria inválida para cupom',
+                        status: :bad_request
+        end
+
         @coupon.burn!(params.require(:order).permit(:code)[:code])
-        
+
         @coupon.update(order: params[:order][:code], status: :burn)
-        
+
         render json: 'Cupom utilizado com sucesso', status: :ok
-        
-        rescue ActionController::ParameterMissing
-          render json: '', status: :precondition_failed
-        rescue ActiveRecord::RecordInvalid
-          render json: '', status: 422
+      rescue ActionController::ParameterMissing
+        render json: '', status: :precondition_failed
+      rescue ActiveRecord::RecordInvalid
+        render json: '', status: :unprocessable_entity
       end
-      
-      
+
       private
-      
-     
-      
+
       def set_coupon
         @coupon = Coupon.find_by!(code: params[:code])
-        rescue ActiveRecord::RecordNotFound
-          render json: 'Cupom não encontrado', status: 404
+      rescue ActiveRecord::RecordNotFound
+        render json: 'Cupom não encontrado', status: :not_found
       end
     end
   end

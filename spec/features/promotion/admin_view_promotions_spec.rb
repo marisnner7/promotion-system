@@ -2,21 +2,21 @@
 
 require 'rails_helper'
 
-feature 'Admin view promotions' do
-  before(:each) do
+describe Promotion do
+  before do
     user = create(:user)
     login_as(user, scope: :user)
     create(:promotion)
   end
 
-  scenario 'and no promotion are created', broken: true do
+  it 'and no promotion are created', broken: true do
     visit root_path
     click_on 'Promoções'
 
     expect(page).to have_content('Nenhuma promoção cadastrada')
   end
 
-  scenario 'successfully' do
+  it 'successfully' do
     visit root_path
     click_on 'Promoções'
 
@@ -25,7 +25,7 @@ feature 'Admin view promotions' do
     expect(page).to have_content('15,00%')
   end
 
-  scenario 'and view details' do
+  it 'and view details' do
     visit root_path
     click_on 'Promoções'
     click_on 'Natal'
@@ -37,20 +37,20 @@ feature 'Admin view promotions' do
     expect(page).to have_content('10')
   end
 
-  scenario 'and return to home page' do
+  it 'and return to home page' do
     visit root_path
     click_on 'Promoções'
     click_on 'Voltar'
 
-    expect(current_path).to eq root_path
+    expect(page).to have_current_path root_path, ignore_query: true
   end
 
-  scenario 'and return to promotions page' do
+  it 'and return to promotions page' do
     visit root_path
     click_on 'Promoções'
     click_on 'Natal'
     click_on 'Voltar'
 
-    expect(current_path).to eq promotions_path
+    expect(page).to have_current_path promotions_path, ignore_query: true
   end
 end

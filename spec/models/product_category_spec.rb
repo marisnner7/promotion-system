@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ProductCategory do
-  context 'validation' do
+  context 'when validation' do
     it 'cannot be blank' do
-      product_category = ProductCategory.new
+      product_category = described_class.new
 
       product_category.valid?
 
@@ -12,8 +14,8 @@ describe ProductCategory do
     end
 
     it 'must be unique' do
-      ProductCategory.create!(name: 'Hospedagem', code: 'HOSP')
-      product_category = ProductCategory.new(name: 'Hospedagem', code: 'HOSP')
+      described_class.create!(name: 'Hospedagem', code: 'HOSP')
+      product_category = described_class.new(name: 'Hospedagem', code: 'HOSP')
 
       product_category.valid?
 

@@ -2,15 +2,14 @@
 
 require 'rails_helper'
 
-feature 'Admin reactivates coupon' do
-  background do
+describe 'Admin reactivates coupon' do
+  before do
     user = create(:user)
     login_as user
     visit root_path
-   
   end
 
-  scenario 'and the coupon is inactive' do
+  it 'and the coupon is inactive' do
     promotion = create(:promotion)
     promotion.generate_coupons!
     promotion.coupons.first.inactive!
@@ -21,7 +20,7 @@ feature 'Admin reactivates coupon' do
     expect(page).to have_link('Reativar cupom')
   end
 
-  scenario 'and the coupon is reactivated' do
+  it 'and the coupon is reactivated' do
     promotion = create(:promotion)
     promotion.generate_coupons!
     promotion.coupons.first.inactive!
@@ -29,10 +28,6 @@ feature 'Admin reactivates coupon' do
     visit promotion_path(promotion)
     click_on 'Reativar cupom'
 
-
-
-
     expect(page).to have_content('Cupom reativado com sucesso')
-
   end
 end

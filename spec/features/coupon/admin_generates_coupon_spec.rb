@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'Admin generates coupons' do
+describe 'Admin generates coupons' do
   before do
     user = create(:user)
     login_as user, scope: :user
@@ -15,7 +15,7 @@ feature 'Admin generates coupons' do
     click_on 'Gerar cupons'
   end
 
-  scenario 'with coupon quantity available' do
+  it 'with coupon quantity available' do
     expect(page).to have_content('NATAL10-0001')
     expect(page).to have_content('NATAL10-0002')
     expect(page).to have_content('NATAL10-0003')
@@ -25,7 +25,7 @@ feature 'Admin generates coupons' do
     expect(page).not_to have_link('Emitir cupons')
   end
 
-  scenario 'and coupons are already generated' do
+  it 'and coupons are already generated' do
     expect(page).not_to have_content('Emitir cupons')
     expect(page).to have_content('NATAL10')
   end

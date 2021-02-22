@@ -7,9 +7,7 @@ class Coupon < ApplicationRecord
   delegate :expiration_date, :discount_rate, to: :promotion
 
   def self.search(search)
-    if search 
-      where(code: search)
-    end
+    where(code: search) if search
   end
 
   def title
@@ -22,17 +20,14 @@ class Coupon < ApplicationRecord
   end
 
   def burn!(order)
-    raise ActiveRecord::RecordInvalid unless order.present?
+    raise ActiveRecord::RecordInvalid if order.blank?
 
     update!(order: order, status: :burn)
   end
 
-
   def valid_category?(category)
-    return true if self.promotion.product_categories.count == 0 || self.promotion.product_categories.find_by(code: category)
+    return true if promotion.product_categories.count.zero? || promotion.product_categories.find_by(code: category)
+
     false
   end
-
-
-
 end

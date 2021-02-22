@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'Visitor visit home page' do
-  scenario 'successfully' do
+describe 'Visitor visit home page' do
+  it 'successfully' do
     visit root_path
 
     expect(page).to have_content('Promotion System')

@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-feature 'Admin registers a promotion' do
-  before(:each) do
+describe Promotion do
+  before do
     user = create(:user)
     login_as(user, scope: :user)
   end
 
-  scenario 'from index page' do
+  it 'from index page' do
     visit root_path
     click_on 'Promoções'
 
@@ -16,7 +16,7 @@ feature 'Admin registers a promotion' do
                               href: new_promotion_path)
   end
 
-  scenario 'successfully' do
+  it 'successfully' do
     create(:product_category)
     create(:product_category, name: 'E-mail', code: 'EMAIL')
     create(:product_category, name: 'Cloud', code: 'CLOUD')
@@ -45,7 +45,7 @@ feature 'Admin registers a promotion' do
     expect(page).to have_content('90')
     expect(page).to have_content('Hospedagem')
     expect(page).to have_content('E-mail')
-    expect(page).to_not have_content('Cloud')
+    expect(page).not_to have_content('Cloud')
     expect(page).to have_link('Voltar')
   end
 end

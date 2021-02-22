@@ -7,10 +7,10 @@ class PromotionsController < ApplicationController
   def index
     @promotions = Promotion.all
     @search = params['search']
-    if @search.present?
-      @name = @search['name']
-      @promotions = Promotion.where('name ILIKE ?', "%#{@name}%")
-    end
+    return if @search.blank?
+
+    @name = @search['name']
+    @promotions = Promotion.where('name ILIKE ?', "%#{@name}%")
   end
 
   def show; end
@@ -50,7 +50,7 @@ class PromotionsController < ApplicationController
 
   def approve
     @promotion = Promotion.find(params[:id])
-    @promotion.update(approver_id: current_user.id, approved_at: Time.now)
+    @promotion.update(approver_id: current_user.id, approved_at: Time.zone.now)
 
     redirect_to promotion_path(@promotion)
   end

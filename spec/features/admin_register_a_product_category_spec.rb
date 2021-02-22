@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-feature 'Admin registers a promotion' do
-  before(:each) do
+describe 'Admin registers a promotion' do
+  before do
     user = create(:user)
     login_as(user, scope: :user)
   end
 
-  scenario 'from index page' do
+  it 'from index page' do
     visit root_path
 
     click_on 'Categorias de produto'

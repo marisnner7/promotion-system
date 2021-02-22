@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-feature 'Admin inactivate coupon' do
-  scenario 'successfully' do
+describe 'Admin inactivate coupon' do
+  it 'successfully' do
     promotion = Promotion.create!(name: 'Cyber Monday', coupon_quantity: 100,
                                   description: 'Promoção de Cyber Monday',
                                   code: 'CYBER15', discount_rate: 15,

@@ -3,7 +3,7 @@
 class ProductCategoriesController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_product_category, only: %i[show edit update destroy]
+  before_action :set_product_category, only: %i[show destroy]
   def index
     @product_categories = ProductCategory.all
   end
@@ -26,7 +26,6 @@ class ProductCategoriesController < ApplicationController
   def destroy
     @product_category.destroy
     redirect_to product_categories_path, notice: 'Categoria deletada com sucesso'
-
   end
 
   private
