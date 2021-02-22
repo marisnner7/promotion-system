@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     post 'approve', on: :member
 
   end
-  resources :product_categories, only: %i[index show new create]
+  resources :product_categories, only: %i[index show new create destroy]
 
-  resources :coupons, only: [] do
+  resources :coupons, only: %i[index] do
     post 'inactivate', on: :member
     post 'reactivate', on: :member
   end
