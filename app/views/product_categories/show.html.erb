@@ -1,2 +1,8 @@
-<%= @product_category.name %>
-<%= @product_category.code %>
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= @product_category.name %></li>
+    <li class="list-group-item"><%= @product_category.code %></li>
+    <%= link_to 'Deletar Categoria', product_category_path, method: :delete , class: "btn btn-outline-danger" %>
+  </ul>
+  <%= link_to "Voltar", product_categories_path, class:'btn btn-outline-secondary' %>
+</div>

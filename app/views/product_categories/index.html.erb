@@ -1,7 +1,14 @@
-<%= "Nenhuma categoria cadastrada" if @product_categories.empty? %>
 
 <%= link_to "Registrar categoria de produto", new_product_category_path , class: 'btn btn-outline-secondary' %>
+  
 <% @product_categories.each do |product_category| %>
-  <%= link_to product_category.name, product_category_path(product_category)  %>
-  <%= product_category.code %> 
+  <div class="container">
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">  <%= link_to product_category.name, product_category_path(product_category)  %></li>
+          <li class="list-group-item">  <%= product_category.code %> </li>
+        </ul>
+      </div>
+    </div>
 <% end %>
+  <%= "Nenhuma categoria cadastrada" if @product_categories.empty? %>
