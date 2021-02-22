@@ -22,3 +22,8 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Simple_COV
+All Files ( 98.68% covered at 2.77 hits/line )
+18 files in total.
+152 relevant lines, 150 lines covered and 2 lines missed. ( 98.68% )

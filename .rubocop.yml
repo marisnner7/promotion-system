@@ -12,17 +12,14 @@ AllCops:
     - 'config/**/*'
     - 'node_modules/**/*'
 
-
 Style/Documentation:
   Enabled: false
 
 Style/FormatString:
   Enabled: false
 
-
 Lint/UselessAssignment:
   Enabled: false
-
 
 Style/AsciiComments:
   Enabled: false
