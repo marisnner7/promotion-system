@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class CouponsController < ApplicationController
+
+  def index
+    @coupons = Coupon.search(params[:coupons_query])
+  end
+  
   def inactivate
     @coupon = Coupon.find(params[:id])
     @coupon.inactive!
