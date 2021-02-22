@@ -6,6 +6,12 @@ class Coupon < ApplicationRecord
   enum status: { active: 0, inactive: 20, burn: 10 }
   delegate :expiration_date, :discount_rate, to: :promotion
 
+  def self.search(search)
+    if search 
+      where(code: search)
+    end
+  end
+
   def title
     "#{code} (#{Coupon.human_attribute_name("status.#{status}")})"
   end
@@ -15,13 +21,18 @@ class Coupon < ApplicationRecord
             only: %i[] }.merge(options))
   end
 
-  private
+  def burn!(order)
+    raise ActiveRecord::RecordInvalid unless order.present?
 
-  def discount_rate
-    promotion.discount_rate
+    update!(order: order, status: :burn)
   end
 
-  def expiration_date
-    I18n.l(promotion.expiration_date)
+
+  def valid_category?(category)
+    return true if self.promotion.product_categories.count == 0 || self.promotion.product_categories.find_by(code: category)
+    false
   end
+
+
+
 end
