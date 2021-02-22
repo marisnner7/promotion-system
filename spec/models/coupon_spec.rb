@@ -26,5 +26,10 @@ RSpec.describe Coupon, type: :model do
       expect(coupon).to be_inactive
       expect(coupon.title).to eq('NATAL10-0002 (Inactive)')
     end
+
+    it 'status burned' do
+      coupon = Coupon.new(code: 'NATAL10-0001', status: :burn)
+      expect(coupon.title).to eq('NATAL10-0001 (Burn)')
+    end
   end
 end

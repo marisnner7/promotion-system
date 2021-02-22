@@ -6,34 +6,33 @@ feature 'Admin reactivates coupon' do
   background do
     user = create(:user)
     login_as user
+    visit root_path
+   
   end
 
-  scenario 'successfully' do
-    visit root_path
+  scenario 'and the coupon is inactive' do
     promotion = create(:promotion)
     promotion.generate_coupons!
-
     promotion.coupons.first.inactive!
-    promotion.coupons.first.active!
 
     click_on 'Promoções'
     click_on 'Natal'
 
-    expect(page).to have_content('NATAL10-0001 (Active)')
-    expect(promotion.coupons.first).to be_active
+    expect(page).to have_link('Reativar cupom')
   end
 
-  scenario 'and the coupon is active' do
-    visit root_path
+  scenario 'and the coupon is reactivated' do
     promotion = create(:promotion)
     promotion.generate_coupons!
-
     promotion.coupons.first.inactive!
-    promotion.coupons.first.active!
 
-    click_on 'Promoções'
-    click_on 'Natal'
+    visit promotion_path(promotion)
+    click_on 'Reativar cupom'
 
-    expect(page).to_not have_link('Reativar')
+
+
+
+    expect(page).to have_content('Cupom reativado com sucesso')
+
   end
 end
