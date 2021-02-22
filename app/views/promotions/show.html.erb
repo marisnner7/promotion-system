@@ -9,7 +9,7 @@
     <p class="card-text">Quantidade: <%= @promotion.coupon_quantity %></p>
     <p class="card-text">Expiração: <%= @promotion.expiration_date.strftime('%d/%m/%Y') %></p>
       <% @promotion.product_categories.each do |product_category| %>
-        <p  class="card-text">Categoria: ><%= product_category.name %></p>
+        <p  class="card-text">Categoria: <%= product_category.name %></p>
       <% end %>
   </div>
 
