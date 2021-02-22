@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CouponsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @coupons = Coupon.search(params[:coupons_query])
   end
