@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProductCategoriesController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_product_category, only: %i[show edit update destroy]
   def index
     @product_categories = ProductCategory.all
@@ -19,6 +21,12 @@ class ProductCategoriesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @product_category.destroy
+    redirect_to product_categories_path, notice: 'Categoria deletada com sucesso'
+
   end
 
   private
