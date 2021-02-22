@@ -19,6 +19,11 @@ class Promotion < ApplicationRecord
       .insert_all!(generate_coupons_code)
   end
 
+
+  def expired?
+    expiration_date < Date.current
+  end
+
   def approved?
     approved_at?
   end
