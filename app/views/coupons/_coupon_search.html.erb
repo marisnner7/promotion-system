@@ -1,0 +1,4 @@
+<%= form_tag coupons_path, :method => 'get' do %>
+  <%= text_field_tag :coupons_query, params[:coupons_query], class: "ls-field" %>
+  <%= submit_tag 'Buscar cupom', :name => nil, class: "ls-btn" %>
+<% end %>
