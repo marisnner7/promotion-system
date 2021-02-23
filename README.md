@@ -15,7 +15,7 @@ https://promo-sys.herokuapp.com
 
 ```bash
 $ git clone git@qsd.campuscode.com.br:marisnner7/promotion_system_v2.git
-
+$ cd promotion_system_v2
 $ docker-compose build 
 $ docker-compose run --service-ports rails bash
 ```
@@ -26,6 +26,7 @@ $ bin/setup
 $ rspec
 $ rails s -b 0.0.0.0
 ```
+Visite a aplicação localmente em localhost:3000
 
 ## Instalação
   Para clonar essa aplicação e rodar localmente, você precisará: [Git](https://git-scm.com), <b>Ruby '2.7.2' </b>, <b>Rails'~> 6.1.1' </b> and for Datebase <b> PostgreSql</b>. 
@@ -49,6 +50,7 @@ $ rspec
 # Run the app
 $ rails s
 ```
+Visite localmente em localhost:3000
 
 ## Algumas Gem's usadas:
 Some Gem's used: devise, faker, simple_form, font-awesome, rspec, rubocop, factory_bot, capybara, simplecov
